@@ -1,8 +1,8 @@
 # CPSC254_RubberDuckyProject
-*Authors: 
-*Danny Diep - Dannydiep963@csu.fullerton.edu
-*Ahad Hussain - ahadhussain1999@csu.fullerton.edu
-*Sean Yu - diginomadik@gmail.com
+Authors: 
+-Danny Diep - Dannydiep963@csu.fullerton.edu
+-Ahad Hussain - ahadhussain1999@csu.fullerton.edu
+-Sean Yu - diginomadik@gmail.com
 
 ## Installation
 1. Plug in the Raspberry PICO to the computer via USB port while holding **BOOTSEL** button on the PICO board to put PICO in boot mode
@@ -14,5 +14,5 @@
 
 
 ## References
-[CircuitPython](https://docs.circuitpython.org/en/6.3.x/README.html).
-[CircuitPython HID](https://learn.adafruit.com/circuitpython-essentials/circuitpython-hid-keyboard-and-mouse).
+-[CircuitPython](https://docs.circuitpython.org/en/6.3.x/README.html).
+-[CircuitPython HID](https://learn.adafruit.com/circuitpython-essentials/circuitpython-hid-keyboard-and-mouse).
