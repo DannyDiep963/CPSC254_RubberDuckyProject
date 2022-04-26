@@ -17,7 +17,7 @@ Sean Yu - diginomadik@gmail.com<br />
 2. Plug in the device via USB port and do not touch the keyboard or mouse<br />
 
 Note:
-The current version is work only on Microsoft Windows 11
+The current version is work on Microsoft Windows 11
 
 ## References
 [CircuitPython](https://docs.circuitpython.org/en/6.3.x/README.html).<br />
