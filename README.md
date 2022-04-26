@@ -4,11 +4,7 @@ Danny Diep - Dannydiep963@csu.fullerton.edu<br />
 Ahad Hussain - ahadhussain1999@csu.fullerton.edu<br />
 Sean Yu - diginomadik@gmail.com<br />
 
-Either use the payloads on Github or the payloads on the provided flashdrive.
-
-If you have received a preconfigured Raspberry Pi Pico, you can skip the Installation process and move to the Execution process.
-
-## Installation
+## Installation - Set up the PICO Board
 1. Plug in the Raspberry PICO to the computer via USB port while holding **BOOTSEL** button on the PICO board to put PICO in boot mode
 2. Download the **adafruit-circuitpython-raspberry_pi_pico-en_US-7.2.4.uf2** from .UF2_file folder and copy the .uf2 file to the PICO
 3. The board will reboot itself
@@ -17,14 +13,17 @@ If you have received a preconfigured Raspberry Pi Pico, you can skip the Install
 6. Download the payload.dd to the PICO board
 
 ## Execute
-1. The device is preinstall all of the requirements
-2. Plug in the device via USB port and do not touch the keyboard or mouse
-3. Sit back and enjoy!<br />
+1. After the device installs from the step above
+2. Plug in the device via USB port
+3. Choose the payload and add to the device. The rename the payload as **payload.dd**
+4. Unplug and plug in the device again 
+5. Sit back and enjoy!<br />
 
-Note:
-The current version is work on Microsoft Windows 11 and Ubuntu 22.04
+Note: 
+When you plug in the device, the payload with run automatically. In order to prevent the payload to run, there are 2 method
+- You have to put the device in boot mode (Step 1 from above). <br/>
+- You have to connect board pin GP0 to GND when you plug in the device
 
 ## References
 [CircuitPython](https://docs.circuitpython.org/en/6.3.x/README.html).<br />
 [CircuitPython HID](https://learn.adafruit.com/circuitpython-essentials/circuitpython-hid-keyboard-and-mouse).<br />
-[Duckyscript](https://github.com/hak5darren/USB-Rubber-Ducky/wiki/Duckyscript).<br />
