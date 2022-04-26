@@ -14,7 +14,8 @@ Sean Yu - diginomadik@gmail.com<br />
 
 ## Execute
 1. The device is preinstall all of the requirements
-2. Plug in the device via USB port and do not touch the keyboard or mouse<br />
+2. Plug in the device via USB port and do not touch the keyboard or mouse
+3. Sit back and enjoy!<br />
 
 Note:
 The current version is work on Microsoft Windows 11
