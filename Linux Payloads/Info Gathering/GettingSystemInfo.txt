@@ -1,0 +1,5 @@
+This payload obtains the system info for the targets computer along with their username and hostname
+This can be useful in executing other types of attacks if their system is out of date
+
+
+The execution is very quick and puts both output files onto the Pico
