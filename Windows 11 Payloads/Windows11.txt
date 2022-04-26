@@ -1,4 +1,0 @@
-This payload works on Windows 11.
-It open the notepad from Windows run, then type in a string. Then it will open a image via default web browser and save it to desktop.
-Next, it open the image via Windows Terminal, and using the "Tab" and "Enter" keys to set the image as the desktop background.
-Finally, it closes all the opened window that the payload open.
