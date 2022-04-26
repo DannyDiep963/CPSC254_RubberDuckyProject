@@ -8,9 +8,10 @@ Sean Yu - diginomadik@gmail.com<br />
 1. Plug in the Raspberry PICO to the computer via USB port while holding **BOOTSEL** button on the PICO board to put PICO in boot mode
 2. Download the **adafruit-circuitpython-raspberry_pi_pico-en_US-7.2.4.uf2** from .UF2_file folder and copy the .uf2 file to the PICO
 3. The board will reboot itself
-4. Download the **adafruit_hid** and copy the folder to lib folder of the PICO Board
-5. Download code.py to the PICO board
-6. Download the payload.dd to the PICO board
+4. Nuke the Pico by copying flash_nuke.uf2 to the Pico
+5. Download the **adafruit_hid** and copy the folder to lib folder of the PICO Board
+6. Download code.py to the PICO board overwriting the original code.py
+7. Download the payload.dd to the PICO board
 
 ## Execute
 1. After the device installs from the step above
