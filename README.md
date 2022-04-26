@@ -27,3 +27,4 @@ When you plug in the device, the payload with run automatically. In order to pre
 ## References
 [CircuitPython](https://docs.circuitpython.org/en/6.3.x/README.html).<br />
 [CircuitPython HID](https://learn.adafruit.com/circuitpython-essentials/circuitpython-hid-keyboard-and-mouse).<br />
+[DuckyScript](https://github.com/hak5darren/USB-Rubber-Ducky/wiki/Duckyscript).<br />
