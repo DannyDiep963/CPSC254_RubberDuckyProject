@@ -18,7 +18,7 @@ Sean Yu - diginomadik@gmail.com<br />
 3. Sit back and enjoy!<br />
 
 Note:
-The current version is work on Microsoft Windows 11
+The current version is work on Microsoft Windows 11 and Ubuntu 22.04
 
 ## References
 [CircuitPython](https://docs.circuitpython.org/en/6.3.x/README.html).<br />
