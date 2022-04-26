@@ -5,6 +5,7 @@
  https://docs.circuitpython.org/projects/hid/en/latest/index.html
  Coding Style Guide - PEP 8 - 
  https://github.com/python/peps/blob/main/pep-0008.txt
+ Version: 1.0
 '''
 
 import usb_hid
