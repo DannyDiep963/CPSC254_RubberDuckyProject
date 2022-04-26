@@ -12,6 +12,12 @@ Sean Yu - diginomadik@gmail.com<br />
 5. Download code.py to the PICO board
 6. Download the payload.dd to the PICO board
 
+## Execute
+1. The device is preinstall all of the requirements
+2. Plug in the device via USB port and do not touch the keyboard or mouse<br />
+
+Note:
+The current version is work only on Microsoft Windows 11
 
 ## References
 [CircuitPython](https://docs.circuitpython.org/en/6.3.x/README.html).<br />
