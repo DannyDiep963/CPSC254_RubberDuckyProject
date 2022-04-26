@@ -1,1 +1,61 @@
-
+DELAY 1500
+ESC
+DELAY 500
+ALT F2
+DELAY 1500
+DELETE
+DELAY 1500
+STRING terminal
+DELAY 1500
+ENTER
+DELAY 1500
+STRING echo "Linux System Info" > systemInfo.txt
+DELAY 1500
+ENTER
+DELAY 1500
+STRING uname -a >> systemInfo.txt
+DELAY 1500
+ENTER
+DELAY 1500
+STRING echo "Hardware Info" >> systemInfo.txt
+DELAY 1500
+ENTER
+STRING lshw -short >> systemInfo.txt
+DELAY 1500
+ENTER
+DELAY 1500
+STRING echo "PCI Busses" >> systemInfo.txt
+DELAY 1500
+ENTER
+STRING lspci >> systemInfo.txt
+DELAY 1500
+ENTER
+DELAY 1500
+STRING echo "Storage Info" >> systemInfo.txt
+DELAY 1500
+ENTER
+STRING lsscsi >> systemInfo.txt
+DELAY 1500
+ENTER
+DELAY 1500
+STRING inxi -Fx >> systemInfo2.txt
+DELAY 1500
+ENTER
+DELAY 1500
+ALT F2
+DELAY 1500
+DELETE
+DELAY 1500
+STRING CIRCUITPY
+DELAY 1500
+ENTER
+DELAY 1500
+ALT F4
+DELAY 1500
+STRING mv systemInfo.txt /media/$USER/CIRCUITPY/
+DELAY 1500
+ENTER
+DELAY 1500
+STRING mv systemInfo2.txt /media/$USER/CIRCUITPY/
+DELAY 1500
+ENTER
