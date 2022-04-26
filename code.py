@@ -1,193 +1,196 @@
-# SPDX-FileCopyrightText: 2017 Dan Halbert for Adafruit Industries
-#
-# SPDX-License-Identifier: MIT
-"""
-`adafruit_hid.keyboard.Keyboard`
-====================================================
+'''
+ Modifier: Danny Diep
+ License : GPLv2.0
+ Original Author: (s): Scott Shawcroft, Dan Halbert -
+ https://docs.circuitpython.org/projects/hid/en/latest/index.html
+ Coding Style Guide - PEP 8 - 
+ https://github.com/python/peps/blob/main/pep-0008.txt
+ Version 2.0
+'''
 
-* Author(s): Scott Shawcroft, Dan Halbert
-* Original Version 1.0 of the code.py 
-"""
+import usb_hid
+from adafruit_hid.keyboard import Keyboard
+from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS as KeyboardLayout
+from adafruit_hid.keycode import Keycode
 
+import supervisor
+
+'''CircuitPython Essentials HID KEYBOARD library'''
 import time
-from micropython import const
+import digitalio
+from board import *
+led = digitalio.DigitalInOut(LED)
+led.direction = digitalio.Direction.OUTPUT
 
-from .keycode import Keycode
-
-from . import find_device
-
-try:
-    from typing import Sequence
-    import usb_hid
-except ImportError:
-    pass
-
-_MAX_KEYPRESSES = const(6)
-
-
-[docs]class Keyboard:
-    """Send HID keyboard reports."""
-
-    LED_NUM_LOCK = 0x01
-    """LED Usage ID for Num Lock"""
-    LED_CAPS_LOCK = 0x02
-    """LED Usage ID for Caps Lock"""
-    LED_SCROLL_LOCK = 0x04
-    """LED Usage ID for Scroll Lock"""
-    LED_COMPOSE = 0x08
-    """LED Usage ID for Compose"""
-
-    # No more than _MAX_KEYPRESSES regular keys may be pressed at once.
-
-    def __init__(self, devices: Sequence[usb_hid.Device]) -> None:
-        """Create a Keyboard object that will send keyboard HID reports.
-
-        Devices can be a sequence of devices that includes a keyboard device or a keyboard device
-        itself. A device is any object that implements ``send_report()``, ``usage_page`` and
-        ``usage``.
-        """
-        self._keyboard_device = find_device(devices, usage_page=0x1, usage=0x06)
-
-        # Reuse this bytearray to send keyboard reports.
-        self.report = bytearray(8)
-
-        # report[0] modifiers
-        # report[1] unused
-        # report[2:8] regular key presses
-
-        # View onto byte 0 in report.
-        self.report_modifier = memoryview(self.report)[0:1]
-
-        # List of regular keys currently pressed.
-        # View onto bytes 2-7 in report.
-        self.report_keys = memoryview(self.report)[2:]
-
-        # Do a no-op to test if HID device is ready.
-        # If not, wait a bit and try once more.
-        try:
-            self.release_all()
-        except OSError:
-            time.sleep(1)
-            self.release_all()
-
-[docs]    def press(self, *keycodes: int) -> None:
-        """Send a report indicating that the given keys have been pressed.
-
-        :param keycodes: Press these keycodes all at once.
-        :raises ValueError: if more than six regular keys are pressed.
-
-        Keycodes may be modifiers or regular keys.
-        No more than six regular keys may be pressed simultaneously.
-
-        Examples::
-
-            from adafruit_hid.keycode import Keycode
-
-            # Press ctrl-x.
-            kbd.press(Keycode.LEFT_CONTROL, Keycode.X)
-
-            # Or, more conveniently, use the CONTROL alias for LEFT_CONTROL:
-            kbd.press(Keycode.CONTROL, Keycode.X)
-
-            # Press a, b, c keys all at once.
-            kbd.press(Keycode.A, Keycode.B, Keycode.C)
-        """
-        for keycode in keycodes:
-            self._add_keycode_to_report(keycode)
-        self._keyboard_device.send_report(self.report)
+'''Dictionary for the keyboard layout'''
+duckyCommands = {
+    'WINDOWS': Keycode.WINDOWS, 'GUI': Keycode.GUI,
+    'APP': Keycode.APPLICATION, 'MENU': Keycode.APPLICATION, 'SHIFT': Keycode.SHIFT,
+    'ALT': Keycode.ALT, 'CONTROL': Keycode.CONTROL, 'CTRL': Keycode.CONTROL,
+    'DOWNARROW': Keycode.DOWN_ARROW, 'DOWN': Keycode.DOWN_ARROW, 'LEFTARROW': Keycode.LEFT_ARROW,
+    'LEFT': Keycode.LEFT_ARROW, 'RIGHTARROW': Keycode.RIGHT_ARROW, 'RIGHT': Keycode.RIGHT_ARROW,
+    'UPARROW': Keycode.UP_ARROW, 'UP': Keycode.UP_ARROW, 'BREAK': Keycode.PAUSE,
+    'PAUSE': Keycode.PAUSE, 'CAPSLOCK': Keycode.CAPS_LOCK, 'DELETE': Keycode.DELETE,
+    'END': Keycode.END, 'ESC': Keycode.ESCAPE, 'ESCAPE': Keycode.ESCAPE, 'HOME': Keycode.HOME,
+    'INSERT': Keycode.INSERT, 'NUMLOCK': Keycode.KEYPAD_NUMLOCK, 'PAGEUP': Keycode.PAGE_UP,
+    'PAGEDOWN': Keycode.PAGE_DOWN, 'PRINTSCREEN': Keycode.PRINT_SCREEN, 'ENTER': Keycode.ENTER,
+    'SCROLLLOCK': Keycode.SCROLL_LOCK, 'SPACE': Keycode.SPACE, 'TAB': Keycode.TAB,
+    'BACKSPACE': Keycode.BACKSPACE,
+    'A': Keycode.A, 'B': Keycode.B, 'C': Keycode.C, 'D': Keycode.D, 'E': Keycode.E,
+    'F': Keycode.F, 'G': Keycode.G, 'H': Keycode.H, 'I': Keycode.I, 'J': Keycode.J,
+    'K': Keycode.K, 'L': Keycode.L, 'M': Keycode.M, 'N': Keycode.N, 'O': Keycode.O,
+    'P': Keycode.P, 'Q': Keycode.Q, 'R': Keycode.R, 'S': Keycode.S, 'T': Keycode.T,
+    'U': Keycode.U, 'V': Keycode.V, 'W': Keycode.W, 'X': Keycode.X, 'Y': Keycode.Y,
+    'Z': Keycode.Z, 'F1': Keycode.F1, 'F2': Keycode.F2, 'F3': Keycode.F3,
+    'F4': Keycode.F4, 'F5': Keycode.F5, 'F6': Keycode.F6, 'F7': Keycode.F7,
+    'F8': Keycode.F8, 'F9': Keycode.F9, 'F10': Keycode.F10, 'F11': Keycode.F11,
+    'F12': Keycode.F12,
+}
 
 
-[docs]    def release(self, *keycodes: int) -> None:
-        """Send a USB HID report indicating that the given keys have been released.
-
-        :param keycodes: Release these keycodes all at once.
-
-        If a keycode to be released was not pressed, it is ignored.
-
-        Example::
-
-            # release SHIFT key
-            kbd.release(Keycode.SHIFT)
-        """
-        for keycode in keycodes:
-            self._remove_keycode_from_report(keycode)
-        self._keyboard_device.send_report(self.report)
-
-
-[docs]    def release_all(self) -> None:
-        """Release all pressed keys."""
-        for i in range(8):
-            self.report[i] = 0
-        self._keyboard_device.send_report(self.report)
-
-
-[docs]    def send(self, *keycodes: int) -> None:
-        """Press the given keycodes and then release all pressed keys.
-
-        :param keycodes: keycodes to send together
-        """
-        self.press(*keycodes)
-        self.release_all()
-
-
-    def _add_keycode_to_report(self, keycode: int) -> None:
-        """Add a single keycode to the USB HID report."""
-        modifier = Keycode.modifier_bit(keycode)
-        if modifier:
-            # Set bit for this modifier.
-            self.report_modifier[0] |= modifier
+def convertLine(line):
+    """
+    Function: convertLine()
+    Description: Translating the keyboard input (payload) script
+    Param: line - each line from the payload script
+    Return: a new translated line
+    """
+    newline = []
+    # loop on each key - the filter removes empty values
+    for key in filter(None, line.split(" ")):
+        key = key.upper()
+        # find the keycode for the command in the list
+        command_keycode = duckyCommands.get(key, None)
+        if command_keycode is not None:
+            # if it exists in the list, use it
+            newline.append(command_keycode)
+        elif hasattr(Keycode, key):
+            # if it's in the Keycode module, use it (allows any valid keycode)
+            newline.append(getattr(Keycode, key))
         else:
-            # Don't press twice.
-            # (I'd like to use 'not in self.report_keys' here, but that's not implemented.)
-            for i in range(_MAX_KEYPRESSES):
-                if self.report_keys[i] == keycode:
-                    # Already pressed.
-                    return
-            # Put keycode in first empty slot.
-            for i in range(_MAX_KEYPRESSES):
-                if self.report_keys[i] == 0:
-                    self.report_keys[i] = keycode
-                    return
-            # All slots are filled.
-            raise ValueError("Trying to press more than six keys at once.")
+            # if it's not a known key name, show the error for diagnosis
+            print(f"Unknown key: <{key}>")
+    return newline
 
-    def _remove_keycode_from_report(self, keycode: int) -> None:
-        """Remove a single keycode from the report."""
-        modifier = Keycode.modifier_bit(keycode)
-        if modifier:
-            # Turn off the bit for this modifier.
-            self.report_modifier[0] &= ~modifier
+
+def runScriptLine(line):
+    """
+    Function: runScriptLine()
+    Description: Control the press and release all pressed keys
+    Param: line - single script line
+    Return: NONE
+    """
+    for k in line:
+        kbd.press(k)
+    kbd.release_all()
+
+def sendString(line):
+    """
+    Function: sendString()
+    Description: Typing the string out
+    Param: line - single script line
+    Return: None
+    """
+    layout.write(line)
+
+def parseLine(line):
+    """
+    Function: parseLine()
+    Description: Translate the command meaning of the payload
+    Param: line - each line from the payload script
+    Call the function runScriptLine() to press and release the keyboard input
+    """
+    global defaultDelay
+    if(line[0:3] == "REM"):                 # Comment 
+        # ignore ducky script comments
+        pass
+    elif(line[0:5] == "DELAY"):             # DELAY 
+        time.sleep(float(line[6:])/1000)
+    elif(line[0:6] == "STRING"):            # STRING
+        sendString(line[7:])
+    elif(line[0:5] == "PRINT"):             # PRINT
+        print("[SCRIPT]: " + line[6:])
+    elif(line[0:6] == "IMPORT"):            # IMPORT
+        runScript(line[7:])
+    elif(line[0:13] == "DEFAULT_DELAY"):    # DEFAULT DELAY
+        defaultDelay = int(line[14:]) * 10
+    elif(line[0:12] == "DEFAULTDELAY"):     # DEFAULT DELAY
+        defaultDelay = int(line[13:]) * 10
+    elif(line[0:3] == "LED"):               # LED
+        if(led.value == True):
+            led.value = False
         else:
-            # Check all the slots, just in case there's a duplicate. (There should not be.)
-            for i in range(_MAX_KEYPRESSES):
-                if self.report_keys[i] == keycode:
-                    self.report_keys[i] = 0
+            led.value = True
+    else:
+        newScriptLine = convertLine(line)
+        runScriptLine(newScriptLine)
 
-    @property
-    def led_status(self) -> bytes:
-        """Returns the last received report"""
-        return self._keyboard_device.last_received_report
+def getBootingStatus():
+    """
+    Function: getProgramminStatus()
+    Description: Check if the device is in booting mode
+    Param: NONE
+    Return: the status of the device
+    """
+    # check GP0 for setup mode
+    # see setup mode for instructions
+    deviceStatusPin = digitalio.DigitalInOut(GP0)
+    deviceStatusPin.switch_to_input(pull=digitalio.Pull.UP)
+    deviceStatus = not deviceStatusPin.value
+    return(deviceStatus)
 
-[docs]    def led_on(self, led_code: int) -> bool:
-        """Returns whether an LED is on based on the led code
+def runScript(file):
+    """
+    Function: runScript()
+    Description: Open and read the payload, then separate each line for translation and performing
+    Param: file - payload script
+    Return: NONE
+    """
+    global defaultDelay
+    duckyScriptPath = file
+    f = open(duckyScriptPath,"r",encoding='utf-8')
+    previousLine = ""
+    for line in f:
+        line = line.rstrip()
+        if(line[0:6] == "REPEAT"):
+            for i in range(int(line[7:])):
+                #repeat the last command
+                parseLine(previousLine)
+                time.sleep(float(defaultDelay)/1000)
+        else:
+            parseLine(line)
+            previousLine = line
+        time.sleep(float(defaultDelay)/1000)
 
-        Examples::
 
-            import usb_hid
-            from adafruit_hid.keyboard import Keyboard
-            from adafruit_hid.keycode import Keycode
-            import time
+"""main method"""
+# Setup the PICO as Keyboard Devices
+kbd = Keyboard(usb_hid.devices)
+layout = KeyboardLayout(kbd)
 
-            # Initialize Keybaord
-            kbd = Keyboard(usb_hid.devices)
+# Turn off automatically reloading when files are written to the pico
+supervisor.disable_autoreload()
 
-            # Press and release CapsLock.
-            kbd.press(Keycode.CAPS_LOCK)
-            time.sleep(.09)
-            kbd.release(Keycode.CAPS_LOCK)
+# Allow the device a quick initial time to be recognized by the host computer
+time.sleep(.5)
+led.value = True
+defaultDelay = 0
 
-            # Check status of the LED_CAPS_LOCK
-            print(kbd.led_on(Keyboard.LED_CAPS_LOCK))
+#Getting the status of the board
+deviceStatus = False                # Set defaul status
+deviceStatus = getBootingStatus()
 
-        """
-        return bool(self.led_status[0] & led_code)
+if(deviceStatus == False):          # If the device is not in setup mode, inject the payload
+    payload = 'payload.dd'
+    runScript(payload)
+    led.value = True                # LED stay on indicate that the script has successfully injected.
+
+else:
+    # Led blinking indicate that the script has not run and the device is in the setup mode
+    while True:
+        time.sleep(1.0)
+        led.value = False
+        time.sleep(1.0)
+        led.value = True
+
+    
