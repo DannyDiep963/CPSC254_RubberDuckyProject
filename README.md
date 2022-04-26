@@ -23,3 +23,4 @@ The current version is work on Microsoft Windows 11
 ## References
 [CircuitPython](https://docs.circuitpython.org/en/6.3.x/README.html).<br />
 [CircuitPython HID](https://learn.adafruit.com/circuitpython-essentials/circuitpython-hid-keyboard-and-mouse).<br />
+[Duckyscript](https://github.com/hak5darren/USB-Rubber-Ducky/wiki/Duckyscript).<br />
