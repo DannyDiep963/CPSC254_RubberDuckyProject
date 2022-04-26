@@ -4,6 +4,10 @@ Danny Diep - Dannydiep963@csu.fullerton.edu<br />
 Ahad Hussain - ahadhussain1999@csu.fullerton.edu<br />
 Sean Yu - diginomadik@gmail.com<br />
 
+Either use the payloads on Github or the payloads on the provided flashdrive.
+
+If you have received a preconfigured Raspberry Pi Pico, you can skip the Installation process and move to the Execution process.
+
 ## Installation
 1. Plug in the Raspberry PICO to the computer via USB port while holding **BOOTSEL** button on the PICO board to put PICO in boot mode
 2. Download the **adafruit-circuitpython-raspberry_pi_pico-en_US-7.2.4.uf2** from .UF2_file folder and copy the .uf2 file to the PICO
