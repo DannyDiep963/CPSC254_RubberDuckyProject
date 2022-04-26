@@ -1,6 +1,12 @@
-# License : GPLv2.0
-#https://docs.circuitpython.org/projects/hid/en/latest/
-
+'''
+ Modifier: Danny Diep
+ License : GPLv2.0
+ Original Author: (s): Scott Shawcroft, Dan Halbert -
+ https://docs.circuitpython.org/projects/hid/en/latest/index.html
+ Coding Style Guide - PEP 8 - 
+ https://github.com/python/peps/blob/main/pep-0008.txt
+ Version 2.0
+'''
 
 import usb_hid
 from adafruit_hid.keyboard import Keyboard
@@ -41,13 +47,14 @@ duckyCommands = {
     'F12': Keycode.F12,
 }
 
-'''
-Function: convertLine()
-Description: Translating the keyboard input (payload) script
-Param: line - each line from the payload script
-Return: a new translated line
-'''
+
 def convertLine(line):
+    """
+    Function: convertLine()
+    Description: Translating the keyboard input (payload) script
+    Param: line - each line from the payload script
+    Return: a new translated line
+    """
     newline = []
     # loop on each key - the filter removes empty values
     for key in filter(None, line.split(" ")):
@@ -65,33 +72,34 @@ def convertLine(line):
             print(f"Unknown key: <{key}>")
     return newline
 
-'''
-Function: runScriptLine()
-Description: Control the press and release all pressed keys
-Param: line - single script line
-Return: NONE
-'''
+
 def runScriptLine(line):
+    """
+    Function: runScriptLine()
+    Description: Control the press and release all pressed keys
+    Param: line - single script line
+    Return: NONE
+    """
     for k in line:
         kbd.press(k)
     kbd.release_all()
 
-'''
-Function: sendString()
-Description: Typing the string out
-Param: line - single script line
-Return: None
-'''
 def sendString(line):
+    """
+    Function: sendString()
+    Description: Typing the string out
+    Param: line - single script line
+    Return: None
+    """
     layout.write(line)
 
-'''
-Function: parseLine()
-Description: Translate the command meaning of the payload
-Param: line - each line from the payload script
-Call the function runScriptLine() to press and release the keyboard input
-'''
 def parseLine(line):
+    """
+    Function: parseLine()
+    Description: Translate the command meaning of the payload
+    Param: line - each line from the payload script
+    Call the function runScriptLine() to press and release the keyboard input
+    """
     global defaultDelay
     if(line[0:3] == "REM"):                 # Comment 
         # ignore ducky script comments
@@ -116,13 +124,14 @@ def parseLine(line):
     else:
         newScriptLine = convertLine(line)
         runScriptLine(newScriptLine)
-'''
-Function: getProgramminStatus()
-Description: Check if the device is in booting mode
-Param: NONE
-Return: the status of the device
-'''
+
 def getBootingStatus():
+    """
+    Function: getProgramminStatus()
+    Description: Check if the device is in booting mode
+    Param: NONE
+    Return: the status of the device
+    """
     # check GP0 for setup mode
     # see setup mode for instructions
     deviceStatusPin = digitalio.DigitalInOut(GP0)
@@ -130,13 +139,13 @@ def getBootingStatus():
     deviceStatus = not deviceStatusPin.value
     return(deviceStatus)
 
-'''
-Function: runScript()
-Description: Open and read the payload, then separate each line for translation and performing
-Param: file - payload script
-Return: NONE
-'''
 def runScript(file):
+    """
+    Function: runScript()
+    Description: Open and read the payload, then separate each line for translation and performing
+    Param: file - payload script
+    Return: NONE
+    """
     global defaultDelay
     duckyScriptPath = file
     f = open(duckyScriptPath,"r",encoding='utf-8')
@@ -154,7 +163,7 @@ def runScript(file):
         time.sleep(float(defaultDelay)/1000)
 
 
-'''main method'''
+"""main method"""
 # Setup the PICO as Keyboard Devices
 kbd = Keyboard(usb_hid.devices)
 layout = KeyboardLayout(kbd)
