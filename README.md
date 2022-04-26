@@ -21,8 +21,8 @@ Sean Yu - diginomadik@gmail.com<br />
 
 Note: 
 When you plug in the device, the payload with run automatically. In order to prevent the payload to run, there are 2 method
-- You have to put the device in boot mode (Step 1 from above). <br/>
-- You have to connect board pin GP0 to GND when you plug in the device
+- You have to put the device in boot mode (Step 1 from above). This will reset the board and you have to go through the Installation process again<br/>
+- (Recommend) You have to connect board pin GP0 to GND when you plug in the device.
 
 ## References
 [CircuitPython](https://docs.circuitpython.org/en/6.3.x/README.html).<br />
