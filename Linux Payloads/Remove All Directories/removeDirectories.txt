@@ -1,0 +1,10 @@
+This payload is very simple yet powerful
+It echos the command to recursively remove all directories starting from root
+
+
+DO NOT REMOVE THE "ECHO" TEXT
+Doing so will cause this payload to become dangerous and once plugged in will remove all files from your computer
+
+This highlights just how dangerous plugging in a random USB can be
+It may seem harmless, but within seconds everything is permanently deleted
+This is also why you should always backup your data
