@@ -1,3 +1,4 @@
+REM original script written by Ahad Hussain
 REM executing a payload on CSUF temporary laptops
 REM signs out of the user account, answers security questions, then resets admin password
 REM proceeds to delete the auto scripts and removes the temporary account
