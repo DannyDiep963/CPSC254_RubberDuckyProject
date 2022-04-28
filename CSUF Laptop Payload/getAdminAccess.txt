@@ -1,0 +1,10 @@
+The laptops that you can check out from the library come with two login options
+The first is "laptopuser" which only has user access and doesn't require a password
+The second is "tuffy" which has an unknown password and has administrator access
+This payload will log out of the laptopuser account, reset the tuffy password, and delete the laptopuser account
+It also shows the bash files that the school uses to reset the computer everytime it is turned on
+
+The importance of this script is that it allows students to download and run executable files that they couldn't run on a user account
+An example is Oracle VM Box which doesn't run on the user account but runs on the administrator account
+
+This script should run on any short term laptop that is checked out throught the TSU or the Library
